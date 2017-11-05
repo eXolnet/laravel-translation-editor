@@ -1,0 +1,92 @@
+translation-editor {
+    display: inline;
+}
+
+.translation-editor__highlight translation-editor {
+    background-color: rgba(255, 0, 255, 0.3);
+    cursor: pointer;
+}
+
+.translation-editor__modal {
+    position: fixed;
+    color: #333;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    opacity: 0;
+    -webkit-transition: opacity .15s linear;
+    -o-transition: opacity .15s linear;
+    transition: opacity .15s linear;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.translation-editor__modal.in {
+    display: block;
+    opacity: 1;
+}
+
+.translation-editor__dialog {
+    position: fixed;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    z-index: 10000;
+}
+
+.translation-editor__dialog label {
+    display: block;
+}
+
+.translation-editor__dialog textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #888;
+}
+
+.translation-editor__footer {
+    text-align: right;
+}
+
+.translation-editor__dialog button {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.translation-editor__dialog button.translation-editor__default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.translation-editor__dialog button.translation-editor__primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
