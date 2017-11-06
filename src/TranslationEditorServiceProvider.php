@@ -57,9 +57,7 @@ class TranslationEditorServiceProvider extends ServiceProvider
                 return $compiled;
             }
 
-            $locale = $this->app->getLocale();
-
-            return "<translation-editor locale='{$locale}' path={$expression}>{$compiled}</translation-editor>";
+            return "<translation-editor locale='<?php echo app()->getLocale(); ?>' path={$expression}>{$compiled}</translation-editor>";
         });
     }
 
