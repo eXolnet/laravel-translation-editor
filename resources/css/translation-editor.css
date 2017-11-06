@@ -53,8 +53,24 @@ translation-editor {
     border: 1px solid #888;
 }
 
+.translation-editor__dialog textarea[readonly] {
+    background-color: #f0f0f0;
+}
+
+.translation-editor__locale {
+    text-transform: uppercase;
+}
+
 .translation-editor__footer {
-    text-align: right;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.translation-editor__path {
+    float: left;
+    font-size: 12px;
+    color: #888;
 }
 
 .translation-editor__dialog button {

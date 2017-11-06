@@ -11,14 +11,19 @@
                     editorElement.classList.add('translation-editor__modal');
                     editorElement.innerHTML = '<div class="translation-editor__dialog">' +
                             '<form id="translation-editor-form" class="translation-editor__body">' +
-                                '<label for="translation-editor-source">Source text:</label>' +
+                                '<input type="hidden" name="locale" id="translation-editor-locale" />'+
+                                '<input type="hidden" name="path" id="translation-editor-path" />'+
+                                '<label for="translation-editor-source">Source text (<span id="translation-editor-source-locale" class="translation-editor__locale"></span>):</label>' +
                                 '<textarea id="translation-editor-source" rows="6" readonly></textarea>' +
-                                '<label for="translation-editor-translation">Translation:</label>' +
-                                '<textarea id="translation-editor-translation" rows="6"></textarea>' +
+                                '<label for="translation-editor-translation">Translation (<span id="translation-editor-destination-locale" class="translation-editor__locale"></span>):</label>' +
+                                '<textarea id="translation-editor-destination-translation" rows="6" name="translation"></textarea>' +
                             '</form>' +
                             '<div class="translation-editor__footer">' +
-                                '<button type="button" class="translation-editor__default">Cancel</button> ' +
-                                '<button type="button" class="translation-editor__primary">Save</button>' +
+                                '<div class="translation-editor__path">Key: <span id="translation-editor-path-label"></span></div>'+
+                                '<div>' +
+                                    '<button type="button" class="translation-editor__default">Cancel</button> ' +
+                                    '<button type="button" class="translation-editor__primary">Save</button>' +
+                                '</div>' +
                             '</div>' +
                         '</div>';
 
@@ -57,6 +62,9 @@
                     return;
                 }
 
+                e.preventDefault();
+                e.stopPropagation();
+
                 var target = e.target,
                     locale = target.getAttribute('locale'),
                     path   = target.getAttribute('path');
@@ -64,15 +72,25 @@
                 editor().classList.add('in');
 
                 document.getElementById('translation-editor-source').value = 'Loading...';
-                document.getElementById('translation-editor-translation').value = 'Loading...';
+                document.getElementById('translation-editor-destination-translation').value = 'Loading...';
 
                 window.fetch(encodeURI('{baseRoute}/translation?locale='+ locale +'&path=' + path))
                     .then(function(response) {
                         return response.json();
                     })
                     .then(function (json) {
-                        document.getElementById('translation-editor-source').value = json.source;
-                        document.getElementById('translation-editor-translation').value = json.translation;
+                        document.getElementById('translation-editor-locale').value   = locale;
+                        document.getElementById('translation-editor-path').value = path;
+                        document.getElementById('translation-editor-path-label').innerHTML = path;
+
+                        document.getElementById('translation-editor-source-locale').innerHTML = json.source.locale;
+                        document.getElementById('translation-editor-source').value = json.source.translation;
+
+                        document.getElementById('translation-editor-destination-locale').innerHTML = json.destination.locale;
+                        var translation = document.getElementById('translation-editor-destination-translation');
+
+                        translation.value = json.destination.translation;
+                        translation.focus();
                     });
             });
         }
