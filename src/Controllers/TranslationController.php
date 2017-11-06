@@ -59,6 +59,7 @@ class TranslationController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -68,7 +69,7 @@ class TranslationController extends Controller
 
         list($namespace, $key) = explode('.', $path, 2);
 
-        $locales = $this->translator->get($namespace, [], $locale);
+        $locales = $this->translator->has($namespace, $locale) ? $this->translator->get($namespace, [], $locale) : [];
 
         array_set($locales, $key, $translation);
 
@@ -76,6 +77,11 @@ class TranslationController extends Controller
         $content  = '<?php'. PHP_EOL . PHP_EOL .'return '. $this->export($locales) .';'. PHP_EOL;
 
         $this->filesystem->put($filename, $content);
+
+        // Compile the translation for rendering
+        return response()->json([
+            'compiled' => $translation,
+        ]);
     }
 
     /**
