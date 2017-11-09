@@ -17,18 +17,20 @@ class TranslationEditorServiceProvider extends ServiceProvider
         $this->setupConfig();
         $this->registerBladeDirectives();
 
-        if ($this->isEnabled()) {
+        if (app('translation.editor')->isEnabled()) {
             $this->setupRoutes();
             $this->setupMiddleware();
         }
     }
 
     /**
-     * @return bool
+     * @return void
      */
-    protected function isEnabled()
+    public function register()
     {
-        return config('translation-editor.enabled');
+        $this->app->singleton('translation.editor', function () {
+            return app(TranslationEditor::class);
+        });
     }
 
     /**
@@ -51,13 +53,11 @@ class TranslationEditorServiceProvider extends ServiceProvider
     protected function registerBladeDirectives()
     {
         Blade::directive('text', function ($expression) {
-            $compiled = "<?php echo app('translator')->getFromJson({$expression}); ?>";
-
-            if (! $this->isEnabled()) {
-                return $compiled;
+            if (! app('translation.editor')->isEnabled()) {
+                return "<?php echo app('translator')->getFromJson({$expression}); ?>";
             }
 
-            return "<translation-editor locale='<?php echo app()->getLocale(); ?>' path={$expression}>{$compiled}</translation-editor>";
+            return "<?php echo app('translation.editor')->get({$expression}); ?>";
         });
     }
 
