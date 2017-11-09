@@ -52,7 +52,7 @@ class TranslationEditorServiceProvider extends ServiceProvider
      */
     protected function registerBladeDirectives()
     {
-        Blade::directive('text', function ($expression) {
+        Blade::directive('te', function ($expression) {
             if (! app('translation.editor')->isEnabled()) {
                 return "<?php echo app('translator')->getFromJson({$expression}); ?>";
             }
