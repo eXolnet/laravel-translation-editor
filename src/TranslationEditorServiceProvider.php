@@ -31,6 +31,8 @@ class TranslationEditorServiceProvider extends ServiceProvider
         $this->app->singleton('translation.editor', function () {
             return app(TranslationEditor::class);
         });
+
+        $this->registerCommands();
     }
 
     /**
@@ -100,5 +102,17 @@ class TranslationEditorServiceProvider extends ServiceProvider
     protected function setupMiddleware()
     {
         app(Kernel::class)->pushMiddleware(TranslationEditorMiddleware::class);
+    }
+
+    protected function registerCommands()
+    {
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
+        $this->commands([
+            Console\DetectCommand::class,
+            //Console\TranslateCommand::class,
+        ]);
     }
 }

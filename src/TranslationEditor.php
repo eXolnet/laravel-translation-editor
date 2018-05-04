@@ -19,6 +19,18 @@ class TranslationEditor
     }
 
     /**
+     * @return array
+     */
+    public function detectLocales()
+    {
+        if ($locales = config('app.supported_locales')) {
+            return $locales;
+        }
+
+        return [config('app.locale')];
+    }
+
+    /**
      * @return bool
      */
     public function isEnabled()
