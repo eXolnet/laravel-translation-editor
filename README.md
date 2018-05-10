@@ -1,4 +1,4 @@
-# Laravel Instruments
+# Laravel Translation Editor
 
 [![Latest Stable Version](https://poser.pugx.org/eXolnet/laravel-translation-editor/v/stable?format=flat-square)](https://packagist.org/packages/eXolnet/laravel-translation-editor)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -12,7 +12,7 @@ This project allow you to edit your translations directly through the browser.
 Require this package with composer:
 
 ```
-composer require eXolnet/laravel-translation-editor
+composer require exolnet/laravel-translation-editor
 ```
 
 After updating composer, add the ServiceProvider to the providers array in `config/app.php`:
