@@ -5,6 +5,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Illuminate\Translation\Translator;
+use Illuminate\Filesystem\Filesystem;
 
 class DetectCommand extends Command
 {
@@ -21,7 +23,7 @@ class DetectCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'i18n:detect {target?*}';
+    protected $signature = 'i18n:detect {--l|locale=} {target?*}';
 
     /**
      * The console command description.
@@ -144,15 +146,35 @@ class DetectCommand extends Command
             $this->comment('+ '. $target);
             $this->comment('- '. $text['line']);
 
-            $variable = $this->ask('Variable name', 'skip');
+            $definedNames = $this->getDefinedNames();
+
+            $variable = $this->anticipate('Variable name', $definedNames, 'skip');
 
             if ($variable === 'skip') {
                 continue;
             }
 
+            $this->translationEditor->storeTranslation($variable, $text['text'], $this->getLocale());
+
             $content = $this->replaceTextInContext($content, $text, '@te(\''. $variable .'\')');
 
             file_put_contents($file->getRealPath(), $content);
         }
+    }
+
+    /**
+     * @return string
+     */
+    protected function getLocale()
+    {
+        return $this->option('locale') ?: $this->laravel->getLocale();
+    }
+
+    /**
+     * @return array
+     */
+    protected function getDefinedNames()
+    {
+        return $this->translationEditor->getAllDefinedNames($this->getLocale());
     }
 }
