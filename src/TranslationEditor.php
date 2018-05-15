@@ -220,6 +220,21 @@ class TranslationEditor
     }
 
     /**
+     * @param string $text
+     * @param string $locale
+     * @return array
+     */
+    public function findVariablesForText($text, $locale)
+    {
+        $this->loadAllNamespaces($locale);
+
+        return collect($this->translator->getAllVariables($locale))
+            ->filter(function($value) use ($text) {
+                return $value === $text;
+            })->keys()->all();
+    }
+
+    /**
      * @param string $locale
      * @return array
      */

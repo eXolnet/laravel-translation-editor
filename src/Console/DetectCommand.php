@@ -77,7 +77,8 @@ class DetectCommand extends Command
     }
 
     /**
-     * @param string $content
+     * @param $content
+     * @return \Illuminate\Support\Collection|string[]
      */
     protected function extractTexts($content)
     {
@@ -146,9 +147,21 @@ class DetectCommand extends Command
             $this->comment('+ '. $target);
             $this->comment('- '. $text['line']);
 
-            $definedNames = $this->getDefinedNames();
+            $possibleVariables = $this->findVariablesForText($text['text']);
+            $variable = 'create a new variable';
 
-            $variable = $this->anticipate('Variable name', $definedNames, 'skip');
+            if (! empty($possibleVariables) && $this->confirm('Some variables already exists for this text, would you like to use one of them?', true)) {
+                $possibleVariables[] = 'create a new variable';
+                $possibleVariables[] = 'skip';
+                $variable = $this->choice('Available variables', $possibleVariables, 0);
+            }
+
+            if ($variable === 'create a new variable') {
+                $definedNames = $this->getDefinedNames();
+
+                $variable = $this->anticipate('Variable name', $definedNames, 'skip');
+            }
+
 
             if ($variable === 'skip') {
                 continue;
@@ -168,6 +181,14 @@ class DetectCommand extends Command
     protected function getLocale()
     {
         return $this->option('locale') ?: $this->laravel->getLocale();
+    }
+
+    /**
+     * @param string $text
+     * @return array
+     */
+    protected function findVariablesForText($text) {
+        return $this->translationEditor->findVariablesForText($text, $this->getLocale());
     }
 
     /**
