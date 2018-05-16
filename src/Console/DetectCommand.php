@@ -14,7 +14,7 @@ class DetectCommand extends Command
      * @var array
      */
     const DETECTION_REGEXES = [
-        '/\s*(?P<line>.*\s(?P<context>(?:title|alt)="\s*(?P<text>[^"]+)\s*")[^\n]*)/',
+        '/\s*(?P<line>.*\s(?P<context>(?:title|alt|placeholder|aria-label)="\s*(?P<text>[^"]+)\s*")[^\n]*)/',
         '/\s*(?P<line>.*(?P<context>>\s*(?P<text>[^<>\n]+?)\s*<\/)[^\n]*)/',
     ];
 
@@ -82,8 +82,7 @@ class DetectCommand extends Command
      */
     protected function extractTexts($content)
     {
-        $content = preg_replace('/@{{.+?}}/', '', $content);
-        $content = preg_replace('/{{.+?}}/', '', $content);
+        $content = preg_replace('/@?{{.+?}}/', '', $content);
         $content = preg_replace('/{{{.+?}}}/', '', $content);
         $content = preg_replace('/{!!.+?!!}/', '', $content);
         $content = preg_replace('/{{--.+?--}}/', '', $content);
