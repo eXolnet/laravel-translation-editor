@@ -40,6 +40,7 @@ If you discover any security related issues, please email security@exolnet.com i
 ## Credits
 
 - [Alexandre D'Eschambeault](https://github.com/xel1045)
+- [Maxime Mongeau](https://github.com/maxador)
 - [All Contributors](../../contributors)
 
 ## License
