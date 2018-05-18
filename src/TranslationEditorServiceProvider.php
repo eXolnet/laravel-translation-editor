@@ -127,7 +127,7 @@ class TranslationEditorServiceProvider extends ServiceProvider
 
         $this->commands([
             Console\DetectCommand::class,
-            //Console\TranslateCommand::class,
+            Console\TranslateCommand::class,
         ]);
     }
 }
