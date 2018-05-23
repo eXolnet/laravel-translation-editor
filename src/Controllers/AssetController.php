@@ -1,18 +1,18 @@
 <?php namespace Exolnet\Translation\Editor\Controllers;
 
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 class AssetController extends Controller
 {
     /**
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var \Illuminate\Contracts\Filesystem\Filesystem;
      */
     protected $filesystem;
 
     /**
-     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Contracts\Filesystem\Filesystem;
      */
     public function __construct(Filesystem $filesystem)
     {

@@ -5,8 +5,6 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
-use Illuminate\Translation\Translator;
-use Illuminate\Filesystem\Filesystem;
 
 class DetectCommand extends Command
 {

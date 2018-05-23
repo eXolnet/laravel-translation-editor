@@ -5,7 +5,7 @@
 [![Build Status](https://img.shields.io/travis/eXolnet/laravel-translation-editor/master.svg?style=flat-square)](https://travis-ci.org/eXolnet/laravel-translation-editor)
 [![Total Downloads](https://img.shields.io/packagist/dt/eXolnet/laravel-translation-editor.svg?style=flat-square)](https://packagist.org/packages/eXolnet/laravel-translation-editor)
 
-This project allow you to edit your translations directly through the browser.
+This project allow you to edit your translations directly through the browser and the command line.
 
 ## Installation
 
@@ -21,12 +21,25 @@ After updating composer, add the ServiceProvider to the providers array in `conf
 Exolnet\Translation\Editor\TranslationEditorServiceProvider::class
 ```
 
+## Usage
+
+You can detect most of your potential variable string with the `i18n:detect` command. To do so, simply run 
+``` bash
+php artisan i18n:detect
+```
+By default this command will go through all your `.php` files in the views directory and look for potential variables. 
+Every time a string is detected, it will ask you if you want to save it and you will have to provide a name 
+for your variable.
+
+Additionally, you can provide the `--locale` or `-l` option if you want to save the detected variable in another language 
+than the default one in your Laravel configuration.
+
 ## Testing
 
 To run the phpUnit tests, please use:
 
 ``` bash
-$ composer test
+composer test
 ```
 
 ## Contributing
@@ -45,4 +58,5 @@ If you discover any security related issues, please email security@exolnet.com i
 
 ## License
 
-This code is licensed under the [MIT license](http://choosealicense.com/licenses/mit/). Please see the [license file](LICENSE) for more information.
+This code is licensed under the [MIT license](http://choosealicense.com/licenses/mit/). 
+Please see the [license file](LICENSE) for more information.

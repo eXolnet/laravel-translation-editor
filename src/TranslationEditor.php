@@ -1,13 +1,14 @@
 <?php namespace Exolnet\Translation\Editor;
 
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Contracts\Config\Repository as Config;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
 class TranslationEditor
 {
     /**
-     * @var \Illuminate\Filesystem\Filesystem
+     * @var \Illuminate\Contracts\Filesystem\Filesystem
      */
     protected $filesystem;
 
@@ -17,15 +18,22 @@ class TranslationEditor
     protected $translator;
 
     /**
+     * @var \Illuminate\Contracts\Config\Repository
+     */
+    protected $config;
+
+    /**
      * TranslationEditor constructor.
      *
-     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Contracts\Filesystem\Filesystem $filesystem
      * @param \Exolnet\Translation\Editor\Translator $translator
+     * @param \Illuminate\Contracts\Config\Repository $config
      */
-    public function __construct(Filesystem $filesystem, Translator $translator)
+    public function __construct(Filesystem $filesystem, Translator $translator, Config $config)
     {
         $this->filesystem = $filesystem;
         $this->translator = $translator;
+        $this->config = $config;
     }
 
     /**
@@ -33,11 +41,11 @@ class TranslationEditor
      */
     public function detectLocales()
     {
-        if ($locales = config('app.supported_locales')) {
+        if ($locales = $this->config->get('app.supported_locales')) {
             return $locales;
         }
 
-        return [config('app.locale')];
+        return [$this->config->get('app.locale')];
     }
 
     /**
@@ -45,7 +53,7 @@ class TranslationEditor
      */
     public function isEnabled()
     {
-        return config('translation-editor.enabled');
+        return $this->config->get('translation-editor.enabled');
     }
 
     /**
@@ -73,7 +81,7 @@ class TranslationEditor
     {
         $translation = $this->translator->getFromJson($key, $replace, $locale);
 
-        return '<translation-editor locale="'. ($locale ?: app()->getLocale()) .'" path="'. $key .'">'. $translation .'</translation-editor>';
+        return '<translation-editor locale="'. ($locale ?: $this->config->get('app.locale')) .'" path="'. $key .'">'. $translation .'</translation-editor>';
     }
 
     /**
@@ -191,7 +199,7 @@ class TranslationEditor
      * @param string $locale
      * @return array
      */
-    public function getNamespaces($locale)
+    public function getGroups($locale)
     {
         $finder     = new Finder();
         $localePath = resource_path('lang/' . $locale);
@@ -209,13 +217,12 @@ class TranslationEditor
     /**
      * @param string $locale
      */
-    public function loadAllNamespaces($locale)
+    public function loadAllGroups($locale)
     {
-        // // TODO-MM: Should be groups and not namespaces <mmongeau@exolnet.com>
-        $namespaces = $this->getNamespaces($locale);
+        $groups = $this->getGroups($locale);
 
-        foreach ($namespaces as $namespace) {
-            $this->translator->load('*', $namespace, $locale);
+        foreach ($groups as $group) {
+            $this->translator->load('*', $group, $locale);
         }
     }
 
@@ -226,7 +233,7 @@ class TranslationEditor
      */
     public function findVariablesForText($text, $locale)
     {
-        $this->loadAllNamespaces($locale);
+        $this->loadAllGroups($locale);
 
         return collect($this->translator->getAllVariables($locale))
             ->filter(function($value) use ($text) {
@@ -240,7 +247,7 @@ class TranslationEditor
      */
     public function getAllDefinedNames($locale)
     {
-        $this->loadAllNamespaces($locale);
+        $this->loadAllGroups($locale);
 
         return $this->translator->getAllDefinedNames($locale);
     }

@@ -4,7 +4,6 @@ use Exolnet\Translation\Editor\Exceptions\TranslationEditorException;
 use Exolnet\Translation\Editor\TranslationEditor;
 use Illuminate\Console\Command;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 
 class TranslateCommand extends Command
 {
@@ -79,7 +78,7 @@ class TranslateCommand extends Command
     {
         $this->info('Translating locale '. $locale .'...');
 
-        $this->translationEditor->loadAllNamespaces($locale);
+        $this->translationEditor->loadAllGroups($locale);
 
         $existingVariables = $this->translationEditor->getAllDefinedNames($locale);
 
