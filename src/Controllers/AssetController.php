@@ -1,30 +1,16 @@
 <?php namespace Exolnet\Translation\Editor\Controllers;
 
-use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
 class AssetController extends Controller
 {
     /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem;
-     */
-    protected $filesystem;
-
-    /**
-     * @param \Illuminate\Contracts\Filesystem\Filesystem;
-     */
-    public function __construct(Filesystem $filesystem)
-    {
-        $this->filesystem = $filesystem;
-    }
-
-    /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function js()
     {
-        $content = $this->filesystem->get(__DIR__ .'/../../resources/js/translation-editor.js');
+        $content = file_get_contents(__DIR__ .'/../../resources/js/translation-editor.js');
 
         $content = str_replace('{baseRoute}', url('_translation-editor'), $content);
 
@@ -40,7 +26,7 @@ class AssetController extends Controller
      */
     public function css()
     {
-        $content = $this->filesystem->get(__DIR__ .'/../../resources/css/translation-editor.css');
+        $content = file_get_contents(__DIR__ .'/../../resources/css/translation-editor.css');
 
         $response = new Response($content, 200, [
             'Content-Type' => 'text/css',
