@@ -2,6 +2,7 @@
 
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Translation\Translator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -13,7 +14,7 @@ class TranslationEditor
     protected $filesystem;
 
     /**
-     * @var \Exolnet\Translation\Editor\Translator
+     * @var \Illuminate\Translation\Translator
      */
     protected $translator;
 
@@ -26,7 +27,7 @@ class TranslationEditor
      * TranslationEditor constructor.
      *
      * @param \Illuminate\Contracts\Filesystem\Filesystem $filesystem
-     * @param \Exolnet\Translation\Editor\Translator $translator
+     * @param \Illuminate\Translation\Translator $translator
      * @param \Illuminate\Contracts\Config\Repository $config
      */
     public function __construct(Filesystem $filesystem, Translator $translator, Config $config)
@@ -144,7 +145,7 @@ class TranslationEditor
 
         $this->filesystem->put($filename, $content);
 
-        $this->translator->unloadAll();
+        //$this->translator->unloadAll();
     }
 
     /**
@@ -233,12 +234,14 @@ class TranslationEditor
      */
     public function findVariablesForText($text, $locale)
     {
-        $this->loadAllGroups($locale);
+//        $this->loadAllGroups($locale);
+//
+//        return collect($this->translator->getAllVariables($locale))
+//            ->filter(function($value) use ($text) {
+//                return $value === $text;
+//            })->keys()->all();
 
-        return collect($this->translator->getAllVariables($locale))
-            ->filter(function($value) use ($text) {
-                return $value === $text;
-            })->keys()->all();
+        return [];
     }
 
     /**
@@ -247,8 +250,10 @@ class TranslationEditor
      */
     public function getAllDefinedNames($locale)
     {
-        $this->loadAllGroups($locale);
+//        $this->loadAllGroups($locale);
+//
+//        return $this->translator->getAllDefinedNames($locale);
 
-        return $this->translator->getAllDefinedNames($locale);
+        return [];
     }
 }
