@@ -36,8 +36,8 @@
         }
     },
     "scripts": {
-        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
-        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
+        "lint": "phpcs -p --standard=PSR2 src tests",
+        "lint-fix": "phpcbf -p --standard=PSR2 src tests",
         "test": "vendor/bin/phpunit"
     },
     "extra": {
