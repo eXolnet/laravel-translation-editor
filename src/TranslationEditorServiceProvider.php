@@ -90,7 +90,7 @@ class TranslationEditorServiceProvider extends ServiceProvider
             'prefix' => '_translation-editor'
         ];
 
-        $this->app['router']->group($routeConfig, function($router) {
+        $this->app['router']->group($routeConfig, function ($router) {
             $router->get('translation', [
                 'uses' => 'TranslationController@show',
                 'as'   => 'translation-editor.translation.show',

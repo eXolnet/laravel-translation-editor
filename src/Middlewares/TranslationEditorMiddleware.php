@@ -29,7 +29,9 @@ class TranslationEditorMiddleware
         $headPosition = strpos($content, '</head>');
 
 
-        $translationEditorHtml = '<script src="'. route('translation-editor.assets.js') .'" async></script><link href="'. route('translation-editor.assets.css') .'" rel="stylesheet" type="text/css">';
+        $translationEditorHtml =
+            '<script src="'. route('translation-editor.assets.js') .'" async></script>'.
+            '<link href="'. route('translation-editor.assets.css') .'" rel="stylesheet" type="text/css">';
 
         // Build the content with our stats collector
         $content = substr($content, 0, $headPosition) . $translationEditorHtml . substr($content, $headPosition);

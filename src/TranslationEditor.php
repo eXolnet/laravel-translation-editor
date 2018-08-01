@@ -82,7 +82,9 @@ class TranslationEditor
     {
         $translation = $this->translator->getFromJson($key, $replace, $locale);
 
-        return '<translation-editor locale="'. ($locale ?: $this->config->get('app.locale')) .'" path="'. $key .'">'. $translation .'</translation-editor>';
+        return '<translation-editor locale="'. ($locale ?: $this->config->get('app.locale')) .'" path="'. $key .'">'.
+                $translation .
+            '</translation-editor>';
     }
 
     /**
@@ -109,7 +111,10 @@ class TranslationEditor
     {
         // Get source translation
         $sourceLocale = $this->getSourceLocale($locale);
-        $sourceValue  = $sourceLocale && $this->translator->has($path, $sourceLocale) ? $this->translator->get($path, [], $sourceLocale) : null;
+
+        $sourceValue = $sourceLocale && $this->translator->has($path, $sourceLocale)
+            ? $this->translator->get($path, [], $sourceLocale)
+            : null;
 
         // Get actual translation
         $translation = $this->translator->has($path, $locale) ? $this->translator->get($path, [], $locale) : null;
@@ -192,7 +197,7 @@ class TranslationEditor
                 return '[' . PHP_EOL . implode(','.PHP_EOL, $result) . PHP_EOL . $indent . ']';
 
             default:
-                return var_export($expression, TRUE);
+                return var_export($expression, true);
         }
     }
 

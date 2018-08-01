@@ -147,10 +147,17 @@ class DetectCommand extends Command
             $possibleVariables = $this->findVariablesForText($text['text']);
             $variable = 'create a new variable';
 
-            if (! empty($possibleVariables) && $this->confirm('Some variables already exists for this text, would you like to use one of them?', true)) {
-                $possibleVariables[] = 'create a new variable';
-                $possibleVariables[] = 'skip';
-                $variable = $this->choice('Available variables', $possibleVariables, 0);
+            if (! empty($possibleVariables)) {
+                $shouldSkip = $this->confirm(
+                    'Some variables already exists for this text, would you like to use one of them?',
+                    true
+                );
+
+                if ($shouldSkip) {
+                    $possibleVariables[] = 'create a new variable';
+                    $possibleVariables[] = 'skip';
+                    $variable = $this->choice('Available variables', $possibleVariables, 0);
+                }
             }
 
             if ($variable === 'create a new variable') {
@@ -184,7 +191,8 @@ class DetectCommand extends Command
      * @param string $text
      * @return array
      */
-    protected function findVariablesForText($text) {
+    protected function findVariablesForText($text)
+    {
         return $this->translationEditor->findVariablesForText($text, $this->getLocale());
     }
 

@@ -6,7 +6,8 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Contracts\Config\Repository as Config;
 use Mockery as m;
 
-class TranslationEditorTest extends UnitTest {
+class TranslationEditorTest extends UnitTest
+{
 
     /**
      * @var \Mockery\MockInterface|\Illuminate\Contracts\Filesystem\Filesystem

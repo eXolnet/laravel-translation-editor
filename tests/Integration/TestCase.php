@@ -3,7 +3,8 @@
 use Exolnet\Translation\Editor\TranslationEditorServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
-class TestCase extends Orchestra {
+class TestCase extends Orchestra
+{
     public function setUp()
     {
         parent::setUp();
