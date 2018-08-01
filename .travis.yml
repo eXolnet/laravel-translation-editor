@@ -16,4 +16,5 @@ before_script:
   - travis_retry composer update --no-interaction --prefer-dist -vvv
 
 script:
-  - phpunit
+  - composer test
+  - composer lint
