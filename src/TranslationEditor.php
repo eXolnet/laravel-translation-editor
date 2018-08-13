@@ -3,7 +3,7 @@
 namespace Exolnet\Translation\Editor;
 
 use Illuminate\Contracts\Config\Repository as Config;
-use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\Translator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -11,9 +11,9 @@ use Symfony\Component\Finder\SplFileInfo;
 class TranslationEditor
 {
     /**
-     * @var \Illuminate\Contracts\Filesystem\Filesystem
+     * @var \Illuminate\Contracts\Config\Repository
      */
-    protected $filesystem;
+    protected $config;
 
     /**
      * @var \Illuminate\Translation\Translator
@@ -21,22 +21,22 @@ class TranslationEditor
     protected $translator;
 
     /**
-     * @var \Illuminate\Contracts\Config\Repository
+     * @var \Illuminate\Filesystem\Filesystem;
      */
-    protected $config;
+    protected $files;
 
     /**
      * TranslationEditor constructor.
      *
-     * @param \Illuminate\Contracts\Filesystem\Filesystem $filesystem
-     * @param \Illuminate\Translation\Translator $translator
      * @param \Illuminate\Contracts\Config\Repository $config
+     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Filesystem\Filesystem; $files
      */
-    public function __construct(Filesystem $filesystem, Translator $translator, Config $config)
+    public function __construct(Config $config, Translator $translator, Filesystem $files)
     {
-        $this->filesystem = $filesystem;
-        $this->translator = $translator;
         $this->config = $config;
+        $this->translator = $translator;
+        $this->files = $files;
     }
 
     /**
@@ -95,7 +95,7 @@ class TranslationEditor
     public function getLocales()
     {
         $availableLocales  = [$this->translator->getFallback()];
-        $localeDirectories = $this->filesystem->directories(resource_path('lang'));
+        $localeDirectories = $this->files->directories(resource_path('lang'));
 
         foreach ($localeDirectories as $localeDirectory) {
             $availableLocales[] = pathinfo($localeDirectory, PATHINFO_FILENAME);
@@ -150,7 +150,7 @@ class TranslationEditor
         $filename = resource_path('lang/'. $locale .'/'. $namespace .'.php');
         $content  = '<?php'. PHP_EOL . PHP_EOL .'return '. $this->export($locales) .';'. PHP_EOL;
 
-        $this->filesystem->put($filename, $content);
+        $this->files->put($filename, $content);
 
         //$this->translator->unloadAll();
     }

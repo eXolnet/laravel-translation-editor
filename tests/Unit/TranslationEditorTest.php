@@ -5,21 +5,11 @@ namespace Exolnet\Translation\Editor\Tests\Unit;
 use Exolnet\Translation\Editor\TranslationEditor;
 use Exolnet\Translation\Editor\Translator;
 use Illuminate\Contracts\Config\Repository as Config;
-use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Filesystem\Filesystem;
 use Mockery as m;
 
 class TranslationEditorTest extends UnitTest
 {
-    /**
-     * @var \Mockery\MockInterface|\Illuminate\Contracts\Filesystem\Filesystem
-     */
-    protected $filesystem;
-
-    /**
-     * @var \Mockery\MockInterface|\Exolnet\Translation\Editor\Translator
-     */
-    protected $translator;
-
     /**
      * @var \Mockery\MockInterface|\Exolnet\Translation\Editor\TranslationEditor
      */
@@ -30,13 +20,23 @@ class TranslationEditorTest extends UnitTest
      */
     protected $config;
 
+    /**
+     * @var \Mockery\MockInterface|\Exolnet\Translation\Editor\Translator
+     */
+    protected $translator;
+
+    /**
+     * @var \Mockery\MockInterface|\Illuminate\Filesystem\Filesystem
+     */
+    protected $filesystem;
+
     public function setUp()
     {
-        $this->filesystem = m::mock(Filesystem::class);
-        $this->translator = m::mock(Translator::class);
         $this->config = m::mock(Config::class);
+        $this->translator = m::mock(Translator::class);
+        $this->filesystem = m::mock(Filesystem::class);
 
-        $this->editor = new TranslationEditor($this->filesystem, $this->translator, $this->config);
+        $this->editor = new TranslationEditor($this->config, $this->translator, $this->filesystem);
     }
 
     public function testIsEditorDisabledByDefault()

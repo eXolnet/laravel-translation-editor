@@ -4,6 +4,7 @@ namespace Exolnet\Translation\Editor;
 
 use Exolnet\Translation\Editor\Middleware\TranslationEditorEnabled;
 use Exolnet\Translation\Editor\Middleware\TranslationEditorInject;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -35,9 +36,15 @@ class TranslationEditorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('translation.editor', function () {
-            return app(TranslationEditor::class);
+        $this->app->singleton(TranslationEditor::class, function (Container $app) {
+            return new TranslationEditor(
+                $app['config'],
+                $app['translator'],
+                $app['files']
+            );
         });
+
+        $this->app->alias(TranslationEditor::class, 'translation.editor');
 
         $this->registerCommands();
     }
