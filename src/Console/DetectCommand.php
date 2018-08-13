@@ -50,12 +50,12 @@ class DetectCommand extends Command
     /**
      * Execute the console command.
      *
+     * @param \Symfony\Component\Finder\Finder $finder
      * @return void
      */
-    public function handle(TranslationEditor $translationEditor)
+    public function handle(Finder $finder)
     {
         $targets = $this->getTargets();
-        $finder  = new Finder();
 
         $finder->files()->in($targets)->name('*.php');
 
