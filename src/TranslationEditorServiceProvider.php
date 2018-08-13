@@ -50,6 +50,16 @@ class TranslationEditorServiceProvider extends ServiceProvider
     }
 
     /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['translation.editor'];
+    }
+
+    /**
      * @return void
      */
     protected function setupConfig()
