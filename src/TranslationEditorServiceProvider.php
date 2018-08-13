@@ -12,13 +12,6 @@ use Illuminate\Support\ServiceProvider;
 class TranslationEditorServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
-    /**
      * Bootstrap any application services.
      *
      * @return void
@@ -47,16 +40,6 @@ class TranslationEditorServiceProvider extends ServiceProvider
         $this->app->alias(TranslationEditor::class, 'translation.editor');
 
         $this->registerCommands();
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['translation.editor'];
     }
 
     /**
