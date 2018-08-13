@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Translation\Editor\Tests\Unit;
+<?php
+
+namespace Exolnet\Translation\Editor\Tests\Unit;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;
