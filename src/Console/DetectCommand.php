@@ -30,7 +30,7 @@ class DetectCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Detect text without translation variables in views.';
+    protected $description = 'Detect text without translation variables in views';
 
     /**
      * @var \Exolnet\Translation\Editor\TranslationEditor

@@ -31,7 +31,7 @@ class TranslateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Pass each translation variables to translate them.';
+    protected $description = 'Pass each translation variables to translate them';
 
     /**
      * @var \Exolnet\Translation\Editor\TranslationEditor
