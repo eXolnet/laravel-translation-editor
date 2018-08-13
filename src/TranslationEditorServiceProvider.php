@@ -2,7 +2,8 @@
 
 namespace Exolnet\Translation\Editor;
 
-use Exolnet\Translation\Editor\Middleware\TranslationEditorMiddleware;
+use Exolnet\Translation\Editor\Middleware\TranslationEditorEnabled;
+use Exolnet\Translation\Editor\Middleware\TranslationEditorInject;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -25,11 +26,8 @@ class TranslationEditorServiceProvider extends ServiceProvider
     {
         $this->setupConfig();
         $this->registerBladeDirectives();
-
-        if (app('translation.editor')->isEnabled()) {
-            $this->setupRoutes();
-            $this->setupMiddleware();
-        }
+        $this->setupRoutes();
+        $this->setupMiddleware();
     }
 
     /**
@@ -42,16 +40,6 @@ class TranslationEditorServiceProvider extends ServiceProvider
         });
 
         $this->registerCommands();
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['translation.editor'];
     }
 
     /**
@@ -89,7 +77,8 @@ class TranslationEditorServiceProvider extends ServiceProvider
     {
         $routeConfig = [
             'namespace' => 'Exolnet\\Translation\\Editor\\Controllers',
-            'prefix' => '_translation-editor'
+            'prefix' => '_translation-editor',
+            'middleware' => [TranslationEditorEnabled::class],
         ];
 
         $this->app['router']->group($routeConfig, function ($router) {
@@ -120,7 +109,7 @@ class TranslationEditorServiceProvider extends ServiceProvider
      */
     protected function setupMiddleware()
     {
-        app(Kernel::class)->pushMiddleware(TranslationEditorMiddleware::class);
+        app(Kernel::class)->pushMiddleware(TranslationEditorInject::class);
     }
 
     /**

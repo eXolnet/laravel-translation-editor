@@ -3,11 +3,25 @@
 namespace Exolnet\Translation\Editor\Middleware;
 
 use Closure;
+use Exolnet\Translation\Editor\TranslationEditor;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TranslationEditorMiddleware
+class TranslationEditorInject
 {
+    /**
+     * @var \Exolnet\Translation\Editor\TranslationEditor
+     */
+    protected $translationEditor;
+
+    /**
+     * @param \Exolnet\Translation\Editor\TranslationEditor $translationEditor
+     */
+    public function __construct(TranslationEditor $translationEditor)
+    {
+        $this->translationEditor = $translationEditor;
+    }
+
     /**
      * @param \Illuminate\Http\Request $request
      * @param \Closure $next
@@ -46,7 +60,8 @@ class TranslationEditorMiddleware
      */
     protected function shouldInjectTranslationEditor(Response $response)
     {
-        return $response->headers->has('Content-Type')
+        return $this->translationEditor->isEnabled()
+            && $response->headers->has('Content-Type')
             && strpos($response->headers->get('Content-Type'), 'html') !== false
             && strpos($response->getContent(), '</translation-editor>') !== false
             && strpos($response->getContent(), '</head>') !== false;
