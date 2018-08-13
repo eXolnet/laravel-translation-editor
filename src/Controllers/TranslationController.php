@@ -2,7 +2,6 @@
 
 namespace Exolnet\Translation\Editor\Controllers;
 
-use App;
 use Exolnet\Translation\Editor\TranslationEditor;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -12,7 +11,7 @@ class TranslationController extends Controller
     /**
      * @var \Exolnet\Translation\Editor\TranslationEditor
      */
-    private $translationEditor;
+    protected $translationEditor;
 
     /**
      * @param \Exolnet\Translation\Editor\TranslationEditor $translationEditor
