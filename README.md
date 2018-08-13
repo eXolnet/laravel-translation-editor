@@ -15,7 +15,9 @@ Require this package with composer:
 composer require exolnet/laravel-translation-editor
 ```
 
-After updating composer, add the ServiceProvider to the providers array in `config/app.php`:
+The translation editor will be enabled when the environment variable ``TRANSLATION_EDITOR_ENABLED`` is ``true``.
+
+If you don't use package auto-discovery, add the service provider to the ``providers`` array in `config/app.php`:
 
 ```
 Exolnet\Translation\Editor\TranslationEditorServiceProvider::class
