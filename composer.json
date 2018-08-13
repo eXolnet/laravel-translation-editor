@@ -1,11 +1,21 @@
 {
     "name": "exolnet/laravel-translation-editor",
     "description": "Allow translation edition through the browser",
+    "keywords": [
+        "exolnet",
+        "laravel",
+        "translation"
+    ],
+    "homepage": "https://github.com/eXolnet/laravel-translation-editor",
     "license": "MIT",
     "authors": [
         {
             "name": "Alexandre D'Eschambeault",
             "email": "adeschambeault@exolnet.com"
+        },
+        {
+            "name": "Maxime Mongeau",
+            "email": "mmongeau@exolnet.com"
         }
     ],
     "require": {
@@ -18,7 +28,7 @@
         "illuminate/translation": "~5.4.0|~5.5.0|~5.6.0"
     },
     "require-dev": {
-        "mockery/mockery": "~0.9",
+        "mockery/mockery": "^1.0",
         "phpunit/phpunit" : "^5.7",
         "orchestra/testbench" : "~3.4.6|~3.5.0|~3.6.0"
     },
@@ -36,9 +46,13 @@
         }
     },
     "scripts": {
-        "lint": "phpcs -p --standard=PSR2 src tests",
-        "lint-fix": "phpcbf -p --standard=PSR2 src tests",
-        "test": "vendor/bin/phpunit"
+        "lint": "vendor/bin/phpcs -p --standard=PSR2 config src tests",
+        "lint-fix": "vendor/bin/phpcbf -p --standard=PSR2 config src tests",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
