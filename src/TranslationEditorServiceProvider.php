@@ -2,7 +2,7 @@
 
 namespace Exolnet\Translation\Editor;
 
-use Exolnet\Translation\Editor\Middlewares\TranslationEditorMiddleware;
+use Exolnet\Translation\Editor\Middleware\TranslationEditorMiddleware;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
