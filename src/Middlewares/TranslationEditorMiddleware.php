@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Translation\Editor\Middlewares;
+<?php
+
+namespace Exolnet\Translation\Editor\Middlewares;
 
 use Closure;
 use Illuminate\Http\Request;

@@ -1,14 +1,15 @@
-<?php namespace Exolnet\Translation\Editor\Tests\Unit;
+<?php
+
+namespace Exolnet\Translation\Editor\Tests\Unit;
 
 use Exolnet\Translation\Editor\TranslationEditor;
 use Exolnet\Translation\Editor\Translator;
-use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Contracts\Config\Repository as Config;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Mockery as m;
 
 class TranslationEditorTest extends UnitTest
 {
-
     /**
      * @var \Mockery\MockInterface|\Illuminate\Contracts\Filesystem\Filesystem
      */

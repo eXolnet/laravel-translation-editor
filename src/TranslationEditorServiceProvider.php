@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Translation\Editor;
+<?php
+
+namespace Exolnet\Translation\Editor;
 
 use Exolnet\Translation\Editor\Middlewares\TranslationEditorMiddleware;
 use Illuminate\Contracts\Http\Kernel;

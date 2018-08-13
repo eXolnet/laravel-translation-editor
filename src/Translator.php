@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Translation\Editor;
+<?php
+
+namespace Exolnet\Translation\Editor;
 
 use Illuminate\Translation\Translator as LaravelTranslator;
 

@@ -1,6 +1,10 @@
-<?php namespace Exolnet\Translation\Editor\Exceptions;
+<?php
 
-class TranslationEditorException extends \RuntimeException
+namespace Exolnet\Translation\Editor\Exceptions;
+
+use RuntimeException;
+
+class TranslationEditorException extends RuntimeException
 {
 
 }

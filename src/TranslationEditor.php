@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Translation\Editor;
+<?php
+
+namespace Exolnet\Translation\Editor;
 
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Filesystem\Filesystem;

@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Translation\Editor\Console;
+<?php
+
+namespace Exolnet\Translation\Editor\Console;
 
 use Exolnet\Translation\Editor\TranslationEditor;
 use Illuminate\Console\Command;

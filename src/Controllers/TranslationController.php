@@ -1,4 +1,6 @@
-<?php namespace Exolnet\Translation\Editor\Controllers;
+<?php
+
+namespace Exolnet\Translation\Editor\Controllers;
 
 use App;
 use Exolnet\Translation\Editor\TranslationEditor;
