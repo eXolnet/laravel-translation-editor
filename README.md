@@ -3,6 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/eXolnet/laravel-translation-editor/v/stable?format=flat-square)](https://packagist.org/packages/eXolnet/laravel-translation-editor)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/eXolnet/laravel-translation-editor/master.svg?style=flat-square)](https://travis-ci.org/eXolnet/laravel-translation-editor)
+[![StyleCI](https://github.styleci.io/repos/109528018/shield?branch=master)](https://github.styleci.io/repos/109528018)
 [![Total Downloads](https://img.shields.io/packagist/dt/eXolnet/laravel-translation-editor.svg?style=flat-square)](https://packagist.org/packages/eXolnet/laravel-translation-editor)
 
 This project allow you to edit your translations directly through the browser and the command line.
