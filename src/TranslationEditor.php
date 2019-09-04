@@ -4,6 +4,7 @@ namespace Exolnet\Translation\Editor;
 
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
 use Illuminate\Translation\Translator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -145,7 +146,7 @@ class TranslationEditor
 
         $locales = $this->translator->has($namespace, $locale) ? $this->translator->get($namespace, [], $locale) : [];
 
-        array_set($locales, $key, $translation);
+        Arr::set($locales, $key, $translation);
 
         $filename = resource_path('lang/'. $locale .'/'. $namespace .'.php');
         $content  = '<?php'. PHP_EOL . PHP_EOL .'return '. $this->export($locales) .';'. PHP_EOL;

@@ -2,6 +2,7 @@
 
 namespace Exolnet\Translation\Editor;
 
+use Illuminate\Support\Arr;
 use Illuminate\Translation\Translator as LaravelTranslator;
 
 class Translator extends LaravelTranslator
@@ -21,7 +22,7 @@ class Translator extends LaravelTranslator
      */
     public function getAllVariables($locale, $namespace = '*')
     {
-        return array_dot(collect($this->loaded[$namespace])
+        return Arr::dot(collect($this->loaded[$namespace])
             ->flatMap(function (array $locales, $group) use ($locale) {
                 return [$group => $locales[$locale]];
             })
