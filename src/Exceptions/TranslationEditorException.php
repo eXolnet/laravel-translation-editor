@@ -6,4 +6,5 @@ use RuntimeException;
 
 class TranslationEditorException extends RuntimeException
 {
+    //
 }
