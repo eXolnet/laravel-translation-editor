@@ -54,7 +54,9 @@ class TranslationEditorTest extends UnitTest
             ->with('translation-editor.enabled')
             ->andReturn(false);
 
-        $this->translator->shouldReceive('getFromJson')
+        $translatorMethodGet = method_exists($this->translator, 'getFromJson') ? 'getFromJson' : 'get';
+
+        $this->translator->shouldReceive($translatorMethodGet)
             ->withArgs(['default.title', [], null])
             ->andReturn('Title');
 
@@ -73,15 +75,17 @@ class TranslationEditorTest extends UnitTest
             ->andReturn('en')
             ->once();
 
-        $this->translator->shouldReceive('getFromJson')
+        $translatorMethodGet = method_exists($this->translator, 'getFromJson') ? 'getFromJson' : 'get';
+
+        $this->translator->shouldReceive($translatorMethodGet)
             ->withArgs(['default.title', [], null])
             ->andReturn('Title');
 
         $result = $this->editor->get('default.title');
         $this->assertStringStartsWith('<translation-editor', $result);
         $this->assertStringEndsWith('</translation-editor>', $result);
-        $this->assertContains('locale="en"', $result);
-        $this->assertContains('path="default.title"', $result);
-        $this->assertContains('Title', $result);
+        $this->assertTrue(strpos($result, 'locale="en"') !== false);
+        $this->assertTrue(strpos($result, 'path="default.title"') !== false);
+        $this->assertTrue(strpos($result, 'Title') !== false);
     }
 }

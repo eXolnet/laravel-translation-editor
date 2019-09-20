@@ -69,7 +69,7 @@ class TranslationEditor
     public function get($key, array $replace = [], $locale = null)
     {
         if (! $this->isEnabled()) {
-            return $this->translator->getFromJson($key, $replace, $locale);
+            return $this->getTranslation($key, $replace, $locale);
         }
 
         return $this->getEditor($key, $replace, $locale);
@@ -81,9 +81,25 @@ class TranslationEditor
      * @param string|null $locale
      * @return string
      */
+    public function getTranslation($key, array $replace = [], $locale = null)
+    {
+        // Before Laravel 5.8, method getFromJson should be used
+        if (method_exists($this->translator, 'getFromJson')) {
+            return $this->translator->getFromJson($key, $replace, $locale);
+        }
+
+        return $this->translator->get($key, $replace, $locale);
+    }
+
+    /**
+     * @param string $key
+     * @param array $replace
+     * @param string|null $locale
+     * @return string
+     */
     public function getEditor($key, array $replace = [], $locale = null)
     {
-        $translation = $this->translator->getFromJson($key, $replace, $locale);
+        $translation = $this->getTranslation($key, $replace, $locale);
 
         return '<translation-editor locale="'. ($locale ?: $this->config->get('app.locale')) .'" path="'. $key .'">'.
                 $translation .
