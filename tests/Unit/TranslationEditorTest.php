@@ -30,7 +30,7 @@ class TranslationEditorTest extends UnitTest
      */
     protected $filesystem;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->config = m::mock(Config::class);
         $this->translator = m::mock(Translator::class);
