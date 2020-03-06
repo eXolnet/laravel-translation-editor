@@ -5,6 +5,7 @@ namespace Exolnet\Translation\Editor;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
+use Illuminate\Support\HtmlString;
 use Illuminate\Translation\Translator;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -79,7 +80,7 @@ class TranslationEditor
      * @param string $key
      * @param array $replace
      * @param string|null $locale
-     * @return string
+     * @return \Illuminate\Support\HtmlString|string
      */
     public function getTranslation($key, array $replace = [], $locale = null)
     {
@@ -95,15 +96,17 @@ class TranslationEditor
      * @param string $key
      * @param array $replace
      * @param string|null $locale
-     * @return string
+     * @return \Illuminate\Support\HtmlString
      */
     public function getEditor($key, array $replace = [], $locale = null)
     {
         $translation = $this->getTranslation($key, $replace, $locale);
 
-        return '<translation-editor locale="'. ($locale ?: $this->config->get('app.locale')) .'" path="'. $key .'">'.
+        return new HtmlString(
+            '<translation-editor locale="'. ($locale ?: $this->config->get('app.locale')) .'" path="'. $key .'">'.
                 $translation .
-            '</translation-editor>';
+            '</translation-editor>'
+        );
     }
 
     /**
