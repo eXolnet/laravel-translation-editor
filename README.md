@@ -26,6 +26,33 @@ Exolnet\Translation\Editor\TranslationEditorServiceProvider::class
 
 ## Usage
 
+### In-app translating
+
+In your development environment, you can enable in-app translation by adding to your `.env` the following
+environment variable:
+
+```
+TRANSLATION_EDITOR_ENABLED=true
+```
+
+You'll then be able to open the editor with `alt + click` on all translations using `te` or `@te` helpers:
+
+```html
+<h1>@te('home.title')</h1>
+
+<!-- OR -->
+
+<h1>{{ te('home.title') }}</h1>
+``` 
+
+And the editor looks like this:
+
+![Editor example](example.jpg)
+
+Once saved, you can commit the edited translation files in `resources/lang/**/*.php` if you're satisfied.
+
+### Detect potential translations
+
 You can detect most of your potential variable string with the `i18n:detect` command. To do so, simply run 
 ``` bash
 php artisan i18n:detect
