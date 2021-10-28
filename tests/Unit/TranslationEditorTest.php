@@ -88,4 +88,30 @@ class TranslationEditorTest extends UnitTest
         $this->assertTrue(strpos($result, 'path="default.title"') !== false);
         $this->assertTrue(strpos($result, 'Title') !== false);
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function testDetectLocales(): void
+    {
+        $this->config->shouldReceive('get')
+            ->with('app.supported_locales')
+            ->once()
+            ->andReturnNull();
+
+        $this->config->shouldReceive('get')
+            ->with('app.locale')
+            ->once()
+            ->andReturn('en');
+
+        $this->assertEquals(['en'], $this->editor->detectLocales());
+
+        $this->config->shouldReceive('get')
+            ->with('app.supported_locales')
+            ->once()
+            ->andReturn(['fr', 'en']);
+
+        $this->assertEquals(['fr', 'en'], $this->editor->detectLocales());
+    }
 }
