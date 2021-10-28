@@ -85,7 +85,8 @@ class TranslatorTest extends TestCase
         try {
             $this->translator->getAllVariables($locale, $namespace);
         } catch (Exception $exception) {
-            $this->assertEquals("Undefined index: " . $namespace, $exception->getMessage());
+            $this->assertStringContainsString($namespace, $exception->getMessage());
+            $this->assertStringContainsString('Undefined', $exception->getMessage());
         }
     }
 }
