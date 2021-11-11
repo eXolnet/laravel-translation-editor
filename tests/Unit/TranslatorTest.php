@@ -5,9 +5,8 @@ namespace Exolnet\Translation\Editor\Tests\Unit;
 use Exception;
 use Exolnet\Translation\Editor\Translator;
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 
-class TranslatorTest extends TestCase
+class TranslatorTest extends UnitTest
 {
     /** @var \Mockery\Mock|\Exolnet\Translation\Editor\Translator*/
     private $translator;

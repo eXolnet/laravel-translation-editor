@@ -32,6 +32,7 @@ class TranslationEditorTest extends UnitTest
 
     public function setUp(): void
     {
+        parent::setUp();
         $this->config = m::mock(Config::class);
         $this->translator = m::mock(Translator::class);
         $this->filesystem = m::mock(Filesystem::class);
@@ -119,6 +120,12 @@ class TranslationEditorTest extends UnitTest
         $this->assertEquals(['fr', 'en'], $this->editor->detectLocales());
     }
 
+
+
+    /**
+     * @test
+     * @return void
+     */
     public function testRetrieveTranslation()
     {
         $this->editor->shouldReceive('getLocales')->once()->andReturn(['fr', 'es']);
@@ -143,6 +150,10 @@ class TranslationEditorTest extends UnitTest
         $this->assertEquals($expectedArray, $this->editor->retrieveTranslation($fakePath, $fakeLocale));
     }
 
+    /**
+     * @test
+     * @return void
+     */
     public function testRetrieveTranslationNoLocale()
     {
         $this->editor->shouldReceive('getLocales')->once()->andReturn(['fr', 'es']);
@@ -166,6 +177,10 @@ class TranslationEditorTest extends UnitTest
         $this->assertEquals($expectedArray, $this->editor->retrieveTranslation($fakePath));
     }
 
+    /**
+     * @test
+     * @return void
+     */
     public function testRetrieveTranslationGetLocalesNull()
     {
         $this->editor->shouldReceive('getLocales')->once()->andReturn([]);
@@ -186,4 +201,5 @@ class TranslationEditorTest extends UnitTest
         ];
         $this->assertEquals($expectedArray, $this->editor->retrieveTranslation($fakePath));
     }
+
 }
