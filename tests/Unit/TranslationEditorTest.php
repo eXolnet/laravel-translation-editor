@@ -36,7 +36,11 @@ class TranslationEditorTest extends UnitTest
         $this->translator = m::mock(Translator::class);
         $this->filesystem = m::mock(Filesystem::class);
 
-        $this->editor = new TranslationEditor($this->config, $this->translator, $this->filesystem);
+        $this->editor= m::mock(TranslationEditor::class, [
+            $this->config,
+            $this->translator,
+            $this->filesystem
+        ])->makePartial();
     }
 
     public function testIsEditorDisabledByDefault()
@@ -113,5 +117,73 @@ class TranslationEditorTest extends UnitTest
             ->andReturn(['fr', 'en']);
 
         $this->assertEquals(['fr', 'en'], $this->editor->detectLocales());
+    }
+
+    public function testRetrieveTranslation()
+    {
+        $this->editor->shouldReceive('getLocales')->once()->andReturn(['fr', 'es']);
+
+        $this->translator->shouldReceive('has')->twice()->andReturn(true);
+        $this->translator->shouldReceive('get')->twice()->andReturn('fr');
+
+        $fakePath = 'test';
+        $fakeLocale = 'fr';
+
+        $expectedArray = [
+            'path' => $fakePath,
+            'source' => [
+                'locale' => 'es',
+                'translation' => 'fr',
+            ],
+            'destination' => [
+                'locale' => $fakeLocale,
+                'translation' => 'fr',
+            ],
+        ];
+        $this->assertEquals($expectedArray, $this->editor->retrieveTranslation($fakePath, $fakeLocale));
+    }
+
+    public function testRetrieveTranslationNoLocale()
+    {
+        $this->editor->shouldReceive('getLocales')->once()->andReturn(['fr', 'es']);
+
+        $this->translator->shouldReceive('has')->twice()->andReturn(true);
+        $this->translator->shouldReceive('get')->twice()->andReturn('fr');
+
+        $fakePath = 'test';
+
+        $expectedArray = [
+            'path' => $fakePath,
+            'source' => [
+                'locale' => 'fr',
+                'translation' => 'fr',
+            ],
+            'destination' => [
+                'locale' => null,
+                'translation' => 'fr',
+            ],
+        ];
+        $this->assertEquals($expectedArray, $this->editor->retrieveTranslation($fakePath));
+    }
+
+    public function testRetrieveTranslationGetLocalesNull()
+    {
+        $this->editor->shouldReceive('getLocales')->once()->andReturn([]);
+        $this->translator->shouldReceive('has')->once()->andReturn(false);
+
+        $fakePath = 'test';
+
+        $expectedArray = [
+            'path' => $fakePath,
+            'source' => [
+                'locale' => null,
+                'translation' => null,
+            ],
+            'destination' => [
+                'locale' => null,
+                'translation' => null,
+            ],
+        ];
+        $this->assertEquals($expectedArray, $this->editor->retrieveTranslation($fakePath));
     }
 }
