@@ -120,8 +120,6 @@ class TranslationEditorTest extends UnitTest
         $this->assertEquals(['fr', 'en'], $this->editor->detectLocales());
     }
 
-
-
     /**
      * @test
      * @return void
@@ -201,5 +199,4 @@ class TranslationEditorTest extends UnitTest
         ];
         $this->assertEquals($expectedArray, $this->editor->retrieveTranslation($fakePath));
     }
-
 }
