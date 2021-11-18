@@ -38,7 +38,6 @@ class TranslationEditorEnabledTest extends TestCase
 
         $this->translationEditor->shouldReceive('isEnabled')->once()->andReturn(true);
         $this->translationEditorEnabled->handle($request, function ($req) {
-            $this->assertTrue(true);
         });
     }
 

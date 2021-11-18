@@ -64,7 +64,6 @@ class TranslationEditorTest extends TestCase
         $this->assertEquals(['en', 'fr', 'es'], $this->editor->getLocales());
     }
 
-
     /**
      * @test
      * @return void
