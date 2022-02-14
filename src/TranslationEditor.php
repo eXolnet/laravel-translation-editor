@@ -115,7 +115,7 @@ class TranslationEditor
     public function getLocales()
     {
         $availableLocales  = [$this->translator->getFallback()];
-        $localeDirectories = $this->files->directories(resource_path('lang'));
+        $localeDirectories = $this->files->directories(app()->langPath());
 
         foreach ($localeDirectories as $localeDirectory) {
             $availableLocales[] = pathinfo($localeDirectory, PATHINFO_FILENAME);
@@ -167,7 +167,7 @@ class TranslationEditor
 
         Arr::set($locales, $key, $translation);
 
-        $filename = resource_path('lang/'. $locale .'/'. $namespace .'.php');
+        $filename = app()->langPath($locale .'/'. $namespace .'.php');
         $content  = '<?php'. PHP_EOL . PHP_EOL .'return '. $this->export($locales) .';'. PHP_EOL;
 
         $this->files->put($filename, $content);
@@ -230,7 +230,7 @@ class TranslationEditor
     public function getGroups($locale)
     {
         $finder     = new Finder();
-        $localePath = resource_path('lang/' . $locale);
+        $localePath = app()->langPath($locale);
 
         $finder->files()->in($localePath)->name('*.php')->depth(0);
 
