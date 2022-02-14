@@ -167,7 +167,7 @@ class TranslationEditor
 
         Arr::set($locales, $key, $translation);
 
-        $filename = app()->langPath($locale .'/'. $namespace .'.php');
+        $filename = app()->langPath() . DIRECTORY_SEPARATOR . $locale .'/'. $namespace .'.php';
         $content  = '<?php'. PHP_EOL . PHP_EOL .'return '. $this->export($locales) .';'. PHP_EOL;
 
         $this->files->put($filename, $content);
@@ -230,7 +230,7 @@ class TranslationEditor
     public function getGroups($locale)
     {
         $finder     = new Finder();
-        $localePath = app()->langPath($locale);
+        $localePath = app()->langPath() . DIRECTORY_SEPARATOR . $locale;
 
         $finder->files()->in($localePath)->name('*.php')->depth(0);
 
