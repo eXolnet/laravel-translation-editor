@@ -37,7 +37,7 @@ class TranslationEditorTest extends UnitTest
         $this->translator = m::mock(Translator::class);
         $this->filesystem = m::mock(Filesystem::class);
 
-        $this->editor= m::mock(TranslationEditor::class, [
+        $this->editor = m::mock(TranslationEditor::class, [
             $this->config,
             $this->translator,
             $this->filesystem

@@ -12,7 +12,7 @@ class AssetController extends Controller
      */
     public function js()
     {
-        $content = file_get_contents(__DIR__ .'/../../resources/js/translation-editor.js');
+        $content = file_get_contents(__DIR__ . '/../../resources/js/translation-editor.js');
 
         $content = str_replace('{baseRoute}', url('_translation-editor'), $content);
 
@@ -28,7 +28,7 @@ class AssetController extends Controller
      */
     public function css()
     {
-        $content = file_get_contents(__DIR__ .'/../../resources/css/translation-editor.css');
+        $content = file_get_contents(__DIR__ . '/../../resources/css/translation-editor.css');
 
         $response = new Response($content, 200, [
             'Content-Type' => 'text/css',
