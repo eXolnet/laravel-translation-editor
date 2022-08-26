@@ -13,7 +13,7 @@ class DetectCommand extends Command
     /**
      * @var array
      */
-    const DETECTION_REGEXES = [
+    protected const DETECTION_REGEXES = [
         '/\s*(?P<line>.*\s(?P<context>(?:title|alt|placeholder|aria-label)="\s*(?P<text>[^"]+)\s*")[^\n]*)/',
         '/\s*(?P<line>.*(?P<context>>\s*(?P<text>[^<>\n]+?)\s*<\/)[^\n]*)/',
     ];
@@ -133,7 +133,7 @@ class DetectCommand extends Command
             return;
         }
 
-        $this->info('>> '. $file->getRelativePathname());
+        $this->info('>> ' . $file->getRelativePathname());
 
         if (! $this->confirm('Would you like to translate this file?')) {
             return;
@@ -142,9 +142,9 @@ class DetectCommand extends Command
         foreach ($texts as $text) {
             $target = $this->replaceTextInContext($text['line'], $text, '@te(\'variable\')');
 
-            $this->comment('Found: '. $text['text']);
-            $this->comment('+ '. $target);
-            $this->comment('- '. $text['line']);
+            $this->comment('Found: ' . $text['text']);
+            $this->comment('+ ' . $target);
+            $this->comment('- ' . $text['line']);
 
             $possibleVariables = $this->findVariablesForText($text['text']);
             $variable = 'create a new variable';
@@ -175,7 +175,7 @@ class DetectCommand extends Command
 
             $this->translationEditor->storeTranslation($variable, $text['text'], $this->getLocale());
 
-            $content = $this->replaceTextInContext($content, $text, '@te(\''. $variable .'\')');
+            $content = $this->replaceTextInContext($content, $text, '@te(\'' . $variable . '\')');
 
             file_put_contents($file->getRealPath(), $content);
         }

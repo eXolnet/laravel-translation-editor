@@ -41,7 +41,7 @@ class TranslationEditorInjectTest extends TestCase
 
         $response = $this->translationEditorInject->handle($request, function ($req) {
             return new Response('</translation-editor></head>', 200, [
-                'Content-Type' =>'html'
+                'Content-Type' => 'html'
             ]);
         });
         $this->assertStringContainsString('<script', $response->getContent());

@@ -103,7 +103,7 @@ class TranslationEditor
         $translation = $this->getTranslation($key, $replace, $locale);
 
         return new HtmlString(
-            '<translation-editor locale="'. ($locale ?: $this->config->get('app.locale')) .'" path="'. $key .'">'.
+            '<translation-editor locale="' . ($locale ?: $this->config->get('app.locale')) . '" path="' . $key . '">' .
                 $translation .
             '</translation-editor>'
         );
@@ -167,8 +167,8 @@ class TranslationEditor
 
         Arr::set($locales, $key, $translation);
 
-        $filename = app()->langPath() . DIRECTORY_SEPARATOR . $locale .'/'. $namespace .'.php';
-        $content  = '<?php'. PHP_EOL . PHP_EOL .'return '. $this->export($locales) .';'. PHP_EOL;
+        $filename = app()->langPath() . DIRECTORY_SEPARATOR . $locale . '/' . $namespace . '.php';
+        $content  = '<?php' . PHP_EOL . PHP_EOL . 'return ' . $this->export($locales) . ';' . PHP_EOL;
 
         $this->files->put($filename, $content);
 
@@ -205,18 +205,18 @@ class TranslationEditor
                 $result  = [];
 
                 foreach ($expression as $key => $value) {
-                    $line = $indent .'    ';
+                    $line = $indent . '    ';
 
                     if (! $isIndexed) {
                         $line .= $this->export($key) . ' => ';
                     }
 
-                    $line .= $this->export($value, $indent .'    ');
+                    $line .= $this->export($value, $indent . '    ');
 
                     $result[] = $line;
                 }
 
-                return '[' . PHP_EOL . implode(','.PHP_EOL, $result) . PHP_EOL . $indent . ']';
+                return '[' . PHP_EOL . implode(',' . PHP_EOL, $result) . PHP_EOL . $indent . ']';
 
             default:
                 return var_export($expression, true);

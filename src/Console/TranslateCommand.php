@@ -12,7 +12,7 @@ class TranslateCommand extends Command
     /**
      * @var array
      */
-    const DETECTION_REGEXES = [
+    protected const DETECTION_REGEXES = [
         '/@te\(\'(?P<variable>[a-z0-9\.-]+)\'[,)]/',
         '/\W__\(\'(?P<variable>[a-z0-9\.-]+)\'[,)]/',
         '/@lang\(\'(?P<variable>[a-z0-9\.-]+)\'[,)]/',
@@ -78,7 +78,7 @@ class TranslateCommand extends Command
      */
     protected function translateLocale($locale)
     {
-        $this->info('Translating locale '. $locale .'...');
+        $this->info('Translating locale ' . $locale . '...');
 
         $this->translationEditor->loadAllGroups($locale);
 
