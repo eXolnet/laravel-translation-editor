@@ -47,8 +47,8 @@
         }
     },
     "scripts": {
-        "lint": "vendor/bin/phpcs -p --standard=PSR12 config src tests",
-        "lint-fix": "vendor/bin/phpcbf -p --standard=PSR12 config src tests",
+        "lint": "vendor/bin/phpcs -p --standard=PSR12 --ignore=tests/TestFiles/* config src tests",
+        "lint-fix": "vendor/bin/phpcbf -p --standard=PSR12 --ignore=tests/TestFiles/* config src tests",
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
