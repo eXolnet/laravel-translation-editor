@@ -6,7 +6,7 @@ use Exception;
 use Exolnet\Translation\Editor\Translator;
 use Mockery as m;
 
-class TranslatorTest extends UnitTest
+class TranslatorTest extends UnitTestCase
 {
     /** @var \Mockery\Mock|\Exolnet\Translation\Editor\Translator*/
     private $translator;
