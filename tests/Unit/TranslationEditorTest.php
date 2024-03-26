@@ -8,7 +8,7 @@ use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Filesystem\Filesystem;
 use Mockery as m;
 
-class TranslationEditorTest extends UnitTest
+class TranslationEditorTest extends UnitTestCase
 {
     /**
      * @var \Mockery\MockInterface|\Exolnet\Translation\Editor\TranslationEditor

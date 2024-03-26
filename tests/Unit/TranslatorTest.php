@@ -6,7 +6,7 @@ use Exception;
 use Exolnet\Translation\Editor\Translator;
 use Mockery as m;
 
-class TranslatorTest extends UnitTest
+class TranslatorTest extends UnitTestCase
 {
     /** @var \Mockery\Mock|\Exolnet\Translation\Editor\Translator*/
     private $translator;
@@ -83,6 +83,7 @@ class TranslatorTest extends UnitTest
     {
         try {
             $this->translator->getAllVariables($locale, $namespace);
+            $this->assertTrue(true);
         } catch (Exception $exception) {
             $this->assertStringContainsString($namespace, $exception->getMessage());
             $this->assertStringContainsString('Undefined', $exception->getMessage());
