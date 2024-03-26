@@ -83,6 +83,7 @@ class TranslatorTest extends UnitTestCase
     {
         try {
             $this->translator->getAllVariables($locale, $namespace);
+            $this->assertTrue(true);
         } catch (Exception $exception) {
             $this->assertStringContainsString($namespace, $exception->getMessage());
             $this->assertStringContainsString('Undefined', $exception->getMessage());
