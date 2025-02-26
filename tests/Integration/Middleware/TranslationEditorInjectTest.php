@@ -29,7 +29,6 @@ class TranslationEditorInjectTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Exception
      */
@@ -49,7 +48,6 @@ class TranslationEditorInjectTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      * @throws \Exception
      */

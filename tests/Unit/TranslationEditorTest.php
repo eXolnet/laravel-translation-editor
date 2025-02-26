@@ -95,7 +95,6 @@ class TranslationEditorTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testDetectLocales(): void
@@ -121,7 +120,6 @@ class TranslationEditorTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testRetrieveTranslation()
@@ -149,7 +147,6 @@ class TranslationEditorTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testRetrieveTranslationNoLocale()
@@ -176,7 +173,6 @@ class TranslationEditorTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testRetrieveTranslationGetLocalesNull()

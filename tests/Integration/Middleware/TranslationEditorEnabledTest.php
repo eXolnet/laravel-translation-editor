@@ -29,7 +29,6 @@ class TranslationEditorEnabledTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testHandle(): void
@@ -42,7 +41,6 @@ class TranslationEditorEnabledTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testHandleAbort(): void
