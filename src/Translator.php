@@ -22,7 +22,7 @@ class Translator extends LaravelTranslator
      */
     public function getAllVariables($locale, $namespace = '*')
     {
-        return Arr::dot(collect($this->loaded[$namespace])
+        return Arr::dot(collect($this->loaded[$namespace] ?? [])
             ->flatMap(function (array $locales, $group) use ($locale) {
                 return [$group => $locales[$locale]];
             })
