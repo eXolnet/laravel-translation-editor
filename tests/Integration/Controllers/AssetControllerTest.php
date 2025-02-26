@@ -19,7 +19,6 @@ class AssetControllerTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testJs(): void
@@ -31,7 +30,6 @@ class AssetControllerTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testCss(): void

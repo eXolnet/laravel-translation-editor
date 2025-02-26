@@ -48,7 +48,6 @@ class TranslationEditorTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testGetLocales()
@@ -65,7 +64,6 @@ class TranslationEditorTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testStoreTranslation(): void

@@ -28,7 +28,6 @@ class TranslationControllerTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testShow(): void
@@ -58,7 +57,6 @@ class TranslationControllerTest extends TestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testStore(): void

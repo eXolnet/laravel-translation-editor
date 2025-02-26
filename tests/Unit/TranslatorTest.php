@@ -35,7 +35,6 @@ class TranslatorTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testGetALlVariables(): void
@@ -49,7 +48,6 @@ class TranslatorTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testGetAllDefinedNames(): void
@@ -63,7 +61,6 @@ class TranslatorTest extends UnitTestCase
     }
 
     /**
-     * @test
      * @return void
      */
     public function testUnloadAll(): void
